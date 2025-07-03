@@ -1,0 +1,19 @@
+<div class="container my-5">
+  <h2 class="text-center mb-4">Our Products</h2>
+  <div class="row">
+    @for (item of products; track $index) {
+      <div class="col-md-4 col-sm-12 mb-4">
+        <div class="card h-100 shadow">
+        <img [src]="item.image" class="card-img-top" alt="Product 1">
+        <div class="card-body">
+          <h5 class="card-title">{{item.title}}</h5>
+          <p class="card-text">{{item.category}}</p>
+          <p class="card-text text-success">{{item.price}}$</p>
+          <a class="btn btn-primary" [routerLink]="['/details', item.id]">Details</a>
+
+        </div>
+    </div>
+      </div>
+      }
+  </div>
+</div>

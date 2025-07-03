@@ -1,7 +1,7 @@
 <div class="container my-5">
   <h2 class="text-center mb-4">Our Products</h2>
   <div class="row">
-    @for (item of products; track $index) {
+    @for (item of products.slice(0,3); track $index) {
       <div class="col-md-4 col-sm-12 mb-4">
         <app-productitem [itemQ]="item"></app-productitem>
       </div>

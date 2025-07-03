@@ -5,6 +5,7 @@
           <h5 class="card-title">{{itemQ.title}}</h5>
           <p class="card-text">{{itemQ.category}}</p>
           <p class="card-text text-success">{{itemQ.price}}$</p>
+          <a class="btn btn-primary" [routerLink]="['/details', itemQ.id]">Details</a>
         </div>
     </div>
 }
