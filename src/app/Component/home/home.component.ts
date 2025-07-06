@@ -22,7 +22,7 @@ export class HomeComponent {
     this.observer = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting && !this.loaded) {
         this.loadLazyComponent();
-        this.observer.disconnect(); // Load only once
+        this.observer.disconnect();
       }
     });
 

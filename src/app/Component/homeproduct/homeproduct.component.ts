@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { ProductService } from '../../Services/product.service';
 import { Product } from '../../interfaces/iproduct';
 import { ProductitemComponent } from "../productitem/productitem.component";
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-homeproduct',
@@ -12,13 +13,14 @@ import { ProductitemComponent } from "../productitem/productitem.component";
 export class HomeproductComponent {
   readonly _products = inject(ProductService)
   products!: Product[];
+  private productSub! : Subscription;
   
 
   ngOnInit(): void {
     this.getProducts();
   }
   getProducts(): void {
-    this._products.getproducts().subscribe({
+    this.productSub = this._products.getproducts().subscribe({
       next: (res => {
         this.products = res;
       }),
@@ -29,5 +31,10 @@ export class HomeproductComponent {
         console.log('Product fetching completed');
       }
     })
+  }
+  ngOnDestroy(): void {
+    if (this.productSub) {
+      this.productSub.unsubscribe();
+    }
   }
 }
