@@ -16,6 +16,21 @@ export class DetailsComponent {
   }
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
-    this.product = this._products.getProduct(Number(id));
+    this.getProductDetails(id);
   }
+  getProductDetails(id: string | null): void {
+    this._products.getproducts().subscribe({
+      next: (res) => {
+        this.product = res.find(p => p.id === Number(id));
+      },
+      error: (err) => {
+        console.error('Error fetching product details:', err);
+      },
+      complete: () => {
+        console.log('Product details fetching completed');
+      }
+    });
+  }
+  
+
 }

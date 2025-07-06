@@ -1,32 +1,33 @@
 import { Component, inject } from '@angular/core';
 import { ProductService } from '../../Services/product.service';
-import { RouterLink } from '@angular/router';
 import { Product } from '../../interfaces/iproduct';
+import { ProductitemComponent } from "../productitem/productitem.component";
 
 @Component({
-  selector: 'app-all-products',
-  imports: [RouterLink],
-  templateUrl: './all-products.component.html',
-  styleUrl: './all-products.component.scss'
+  selector: 'app-homeproduct',
+  imports: [ProductitemComponent],
+  templateUrl: './homeproduct.component.html',
+  styleUrl: './homeproduct.component.scss'
 })
-export class AllProductsComponent {
-  readonly _products = inject(ProductService);
-  products! : Product[];
+export class HomeproductComponent {
+  readonly _products = inject(ProductService)
+  products!: Product[];
+  
 
   ngOnInit(): void {
     this.getProducts();
   }
   getProducts(): void {
     this._products.getproducts().subscribe({
-      next: (res) => {
+      next: (res => {
         this.products = res;
-      },
-      error: (err) => {
+      }),
+      error: (err => {
         console.error('Error fetching products:', err);
-      },
+      }),
       complete: () => {
         console.log('Product fetching completed');
       }
-    });
+    })
   }
 }
